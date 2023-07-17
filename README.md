@@ -2,6 +2,28 @@
 
 py3dns.py
 
+# DNS Record Query Python Script
+
+This is a Python script that queries DNS records for DMARC, DKIM, and SPF for multiple domains.
+
+## Usage
+
+1. Install the required library:
+   - `dnspython`: Install it using pip.
+
+   ```bash
+   pip install dnspython
+
+2. Create a file named "domains_new.txt" and list the domains you want to query, with each domain on a separate line.
+
+3. Run the Python script:
+
+bash
+
+python dns_query.py
+
+4. The script will query DMARC, DKIM, and SPF records for each domain and save the results in "domain_results_July2023.txt".
+
 Add DNS record querying functionality for domain analysis
 
 - Implemented a Python script to query DMARC, DKIM, and SPF records for a list of domains.
@@ -25,4 +47,24 @@ This functionality can be valuable for domain analysis, security assessments, an
 
 Please review the script and provide feedback on its implementation and usage.
 
+____________________________________________________________________________________________________
+sslscan.sh
 
+performing SSL scans for multiple domains and converting the results to HTML format.
+
+# SSLScan Bash Script
+
+This is a Bash script that performs SSL scans for multiple domains and converts the results to HTML format.
+
+## Usage
+
+1. Make sure you have the following dependencies installed:
+   - `sslscan`: Install it using your system's package manager or from the official website.
+   - `aha`: Install it using your package manager or follow the instructions at https://github.com/theZiz/aha.
+
+2. Create a file named "domains_new.txt" and list the domains you want to scan, with each domain on a separate line.
+
+3. Execute the script:
+
+   ```bash
+   ./sslscan.sh

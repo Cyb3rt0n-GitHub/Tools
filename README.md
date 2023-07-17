@@ -25,5 +25,4 @@ This functionality can be valuable for domain analysis, security assessments, an
 
 Please review the script and provide feedback on its implementation and usage.
 
-This example commit description explains the addition of DNS record querying functionality to the Python script. It highlights the implemented features, the module used, exception handling, and the generation of an output file. Feel free to modify the description to fit your specific project and requirements.
 

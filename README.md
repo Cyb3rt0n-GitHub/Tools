@@ -1,6 +1,6 @@
 # Tools
 
-py3dns.py
+emailsecurity.py
 
 # DNS Record Query Python Script
 
@@ -14,15 +14,15 @@ This is a Python script that queries DNS records for DMARC, DKIM, and SPF for mu
    ```bash
    pip install dnspython
 
-2. Create a file named "domains_new.txt" and list the domains you want to query, with each domain on a separate line.
+2. Create a file named "domains.txt" and list the domains you want to query, with each domain on a separate line.
 
 3. Run the Python script:
 
 bash
 
-python dns_query.py
+python3 emailsecurity.py
 
-4. The script will query DMARC, DKIM, and SPF records for each domain and save the results in "domain_results_July2023.txt".
+4. The script will query DMARC, DKIM, and SPF records for each domain and save the results in "domain_results.txt".
 
 Add DNS record querying functionality for domain analysis
 

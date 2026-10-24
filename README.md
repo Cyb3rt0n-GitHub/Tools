@@ -54,3 +54,7 @@ See [scripts/README.md](scripts/README.md) for nine read-only Windows, macOS and
 ## Legacy scanner
 
 The standalone [domain scanner](legacy/domain-scanner/README.md) has moved here from the retired GPT-Tools repository. It collects DNS and TLS evidence without AI integration.
+
+## Practical runbooks
+
+Use the [Who, What, Where, When, How and Why guides](docs/tools/README.md) for step-by-step purpose, commands, interpretation and next actions for every tool.

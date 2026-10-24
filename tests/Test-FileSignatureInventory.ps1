@@ -14,3 +14,6 @@ try {
     $report = ($json -join "`n") | ConvertFrom-Json
     if (-not $report.results[0].error) { throw 'Missing error evidence' }
 } finally { Remove-Item -LiteralPath $tempFile -Force -ErrorAction SilentlyContinue }
+# The missing-file case intentionally leaves LASTEXITCODE=2. Do not let the
+# workflow wrapper mistake that expected child status for this test's result.
+exit 0

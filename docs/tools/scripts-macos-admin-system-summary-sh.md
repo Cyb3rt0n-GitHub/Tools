@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Bash syntax checked; native macOS validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** The disk section shows little free space while the incident concerns failed updates.
+
+**Interpretation:** Low free space is a plausible contributor, not proof of the cause.
+
+**Next step:** Check the affected volume, approved capacity thresholds and application logs before deciding on cleanup or capacity changes.

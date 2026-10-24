@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic regression tests; Linux tested; native Windows/macOS validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** JSON reports status expiring with days_remaining 12 and the process exits 1.
+
+**Interpretation:** Certificate validation succeeded for the selected endpoint, but expiry falls within the configured warning window.
+
+**Next step:** Confirm service ownership and renewal arrangements, deploy through change control, then repeat the same hostname/port check.

@@ -53,3 +53,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic regression tests; Linux tested; native Windows/macOS validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** A loopback listener disappears and a wildcard listener appears on the same host and port.
+
+**Interpretation:** The observed bind address changed. Firewall, routing and namespaces still determine reachability.
+
+**Next step:** Confirm whether the change was approved, identify the service owner and validate exposure within authorised scope. Missing vulnerability rows separately require closure evidence.

@@ -53,3 +53,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic regression checks; see detailed guide for platform requirements and limitations. Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** One hostname times out and later hostnames still produce reports.
+
+**Interpretation:** The timed-out endpoint has incomplete evidence. Later results remain independently useful.
+
+**Next step:** Retain partial output, check the authorised endpoint and collection path, then schedule a bounded retry. Do not classify the timeout as secure.

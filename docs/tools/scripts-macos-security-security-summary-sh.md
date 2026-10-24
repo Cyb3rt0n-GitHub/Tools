@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Bash syntax checked; native macOS validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** One security check reports unavailable or permission denied.
+
+**Interpretation:** That control has not been assessed. It is neither a pass nor proof that protection is disabled.
+
+**Next step:** Confirm the applicable product and approved privileges, then repeat the specific check using the platform guide.

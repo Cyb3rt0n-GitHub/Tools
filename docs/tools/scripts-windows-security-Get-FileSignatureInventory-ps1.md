@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Windows synthetic-file CI added; broader operational validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** A file has signature_status NotSigned and a recorded SHA-256.
+
+**Interpretation:** Windows did not report a trusted signature for that observation. This alone is not a malware verdict.
+
+**Next step:** Compare the hash with independently obtained vendor evidence and use the approved analysis process; do not execute or delete it automatically.

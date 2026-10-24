@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic parser regression tests; native Linux/macOS sshd collection validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** passwordauthentication matches the reference but kbdinteractiveauthentication is unknown.
+
+**Interpretation:** One authentication setting matches a review reference; the interactive/MFA path remains unassessed.
+
+**Next step:** Confirm complete effective output for the intended Match context and review AuthenticationMethods/PAM with the service owner. Do not disable an MFA method blindly.

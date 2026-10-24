@@ -14,4 +14,4 @@ No elevation, configuration changes or explicit uploads. Windows trust validatio
 
 [Microsoft cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-authenticodesignature)
 
-Windows CI exercises an unsigned synthetic text file, its SHA-256 and missing-file error handling. These checks do not establish all signing/trust-policy behaviours. Operational validation on target versions remains required.
+Windows CI exercises an unsigned synthetic PowerShell file, its SHA-256 and missing-file error handling. These checks do not establish all signing/trust-policy behaviours. Operational validation on target versions remains required.

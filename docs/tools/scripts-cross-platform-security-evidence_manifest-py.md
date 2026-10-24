@@ -54,3 +54,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic regression tests; Linux tested; native Windows/macOS validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** Comparison lists report.json as changed and another path as missing_unconfirmed.
+
+**Interpretation:** The first file has different content hashes; incomplete collection prevents confirming the missing file was deleted.
+
+**Next step:** Check expected edits, preserve both manifests and recollect inaccessible evidence before approving integrity or transfer completion.

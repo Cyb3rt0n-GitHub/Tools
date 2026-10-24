@@ -1,14 +1,14 @@
 $ErrorActionPreference = 'Stop'
 $collector = Join-Path $PSScriptRoot '../scripts/windows/security/Get-FileSignatureInventory.ps1'
-$tempFile = Join-Path $env:TEMP ([guid]::NewGuid().ToString() + '.txt')
+$tempFile = Join-Path $env:TEMP ([guid]::NewGuid().ToString() + '.ps1')
 try {
-    [IO.File]::WriteAllText($tempFile, 'synthetic unsigned test data')
+    [IO.File]::WriteAllText($tempFile, '# Synthetic unsigned script; never executed by this test.')
     $json = & powershell -NoProfile -File $collector -LiteralPath $tempFile
     if ($LASTEXITCODE -ne 0) { throw 'Collection failed' }
     $report = ($json -join "`n") | ConvertFrom-Json
     if ($report.results.Count -ne 1) { throw 'Wrong result count' }
     if ($report.results[0].sha256 -ne (Get-FileHash -LiteralPath $tempFile -Algorithm SHA256).Hash.ToLowerInvariant()) { throw 'Hash mismatch' }
-    if ($report.results[0].signature_status -ne 'NotSigned') { throw 'Expected unsigned synthetic file' }
+    if ($report.results[0].signature_status -ne 'NotSigned') { throw ('Expected NotSigned for synthetic .ps1; got ' + $report.results[0].signature_status + ': ' + $report.results[0].status_message) }
     $json = & powershell -NoProfile -File $collector -LiteralPath ($tempFile + '.missing')
     if ($LASTEXITCODE -ne 2) { throw 'Missing input did not return collection error' }
     $report = ($json -join "`n") | ConvertFrom-Json

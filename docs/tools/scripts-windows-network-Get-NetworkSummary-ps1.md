@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Native Windows/PowerShell validation pending Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** The configured DNS resolver differs from the approved resolver for this network.
+
+**Interpretation:** A configuration difference deserves investigation; it does not prove compromise or explain every connection failure.
+
+**Next step:** Confirm VPN/interface context, DHCP policy and name-resolution results with the network owner.

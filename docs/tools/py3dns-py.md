@@ -52,3 +52,11 @@ These review/collection tools do not change security configuration or remediate 
 ## Validation
 
 Synthetic regression checks; see detailed guide for platform requirements and limitations. Do not interpret synthetic tests as validation of every operating system, trust configuration or target environment.
+
+## Worked example
+
+**Illustrative scenario, not captured evidence:** A domain returns no DMARC TXT answer while another lookup times out.
+
+**Interpretation:** No answer and a failed lookup are different observations; a timeout leaves presence unknown.
+
+**Next step:** Confirm authoritative DNS and ownership; validate the actual policy before recommending a change.

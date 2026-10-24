@@ -55,4 +55,4 @@ HTTP success is not application assurance; collection is not ownership; a banner
 
 ## Map an organisation
 
-See [enterprise discovery and mapping](../enterprise-mapping/README.md) for documented methods across services, security zones, firewalls/proxies, AD, on-premises, hybrid, cloud and suppliers, with a local-authority scenario and linked-record templates.
+See [enterprise discovery and mapping](../enterprise-mapping/README.md) for documented methods across services, security zones, firewalls/proxies, AD, on-premises, hybrid, cloud and suppliers, with a distributed-enterprise scenario and linked-record templates.

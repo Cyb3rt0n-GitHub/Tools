@@ -20,7 +20,7 @@
   "services": [
     {
       "service_id": "SERVICE1",
-      "name": "Example resident request service",
+      "name": "Example customer request service",
       "owner_id": "OWNER1",
       "criticality": "requires_owner_assessment"
     }

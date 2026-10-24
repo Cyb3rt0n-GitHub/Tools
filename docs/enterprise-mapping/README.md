@@ -98,7 +98,7 @@ AD can seed forests, domains, sites, replication subnets, domain controllers, tr
 - [Directory/DC and local Windows evidence](directory-discovery.md)
 - [On-premises, hybrid, cloud and SaaS](cloud-and-hybrid.md)
 - [Register model, identity joins, freshness and ownership](record-model.md)
-- [Local-authority working scenario and scoping questions](local-authority-scenario.md)
+- [Distributed-enterprise working scenario and scoping questions](enterprise-scenario.md)
 - [Primary research and limitations](sources.md)
 - [Empty register template](templates/estate-register.json) and [fictional worked example](templates/example-estate.json)
 

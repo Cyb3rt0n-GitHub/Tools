@@ -65,4 +65,4 @@ The [21 validation recipes](docs/cookbook/README.md) cover practical DNS, mail, 
 
 ## Enterprise mapping research
 
-The [enterprise discovery and mapping pack](docs/enterprise-mapping/README.md) connects services, assets, identity, zones, boundaries and flows. It includes primary research, a generic local-authority scenario, documented AD examples and fictional register templates. No corporate collection was performed.
+The [enterprise discovery and mapping pack](docs/enterprise-mapping/README.md) connects services, assets, identity, zones, boundaries and flows. It includes primary research, a generic distributed-enterprise scenario, documented AD examples and fictional register templates. No corporate collection was performed.

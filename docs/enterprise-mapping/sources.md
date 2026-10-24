@@ -25,14 +25,12 @@ Reviewed 24 October 2026. Primary guidance below supports the method; local sche
 | S19 | [netsh winhttp](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp) and [WinHTTP command reference](https://learn.microsoft.com/en-us/windows/win32/winhttp/netsh-exe-commands) | Proxy command scope and version differences; use supported display commands only |
 | S20 | [AWS Reachability Analyzer operation](https://docs.aws.amazon.com/vpc/latest/reachability/how-reachability-analyzer-works.html) | Configuration model rather than packet/data-plane testing; documented supported scope |
 | S21 | [Azure NSG flow-log overview](https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview) and [migration](https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-migrate) | New-creation restriction, 30 September 2027 retirement and migration planning |
-| S22 | [Local Digital CAF for local government](https://www.localdigital.gov.uk/cyber/cyber-assessment-framework-for-local-government/) | Essential services, critical systems and whole-organisation participation |
-| S23 | [LGA Cyber 360 Framework](https://www.local.gov.uk/publications/lga-cyber-360-framework) | Council asset interdependencies, ownership and supplier responsibility context |
 
 ## Research boundaries
 
 - Public documentation was reviewed, not vendor-paid standards text. This is not an ISO/IEC certification mapping or a complete control-by-control CAF assessment.
-- NHS guidance supplies transferable segmentation questions, not a claim that its healthcare requirements apply to every council.
-- Industry guidance supports layered inventories and flows; the proposed red/amber/green legend and register fields are local engineering decisions. CAF/GovAssure outcomes must be assessed through the applicable scheme and scope, not inferred from a map.
+- NHS guidance supplies transferable segmentation questions, not a claim that its healthcare requirements apply to every organisation.
+- Industry guidance supports layered inventories and flows; the proposed red/amber/green legend and register fields are local engineering decisions. Framework outcomes must be assessed through the applicable scheme and scope, not inferred from a map.
 - Commands are documentation examples with syntax checks. No AD, firewall/proxy, cloud or live corporate collection was executed. Read permissions, scale, product versions, pagination and source freshness require a pilot.
 - Earlier lab/native LDAP/SMB discovery references are not a verified complete internal DC mapping command set. No enterprise scanner implementation or private evidence was imported into this public pack. Review any recovered original commands separately for purpose, permissions and output before adding them.
 - No inventory product or commercial tooling has been evaluated, purchased or recommended here. Use existing source systems where possible and validate their coverage.

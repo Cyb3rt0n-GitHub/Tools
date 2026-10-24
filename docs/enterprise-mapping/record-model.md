@@ -48,4 +48,4 @@ Maintain a high-level service/context view; site and WAN/hybrid view; zone/bound
 
 ## Validation and review
 
-The empty template names the collections. The fictional example demonstrates joins and different evidence levels; it is not an authoritative production schema or any council's estate. Local structural checks confirm IDs/references in the example; service owners must validate a populated model. Initial acceptance: one critical service with accountable ownership, explicit dependencies, boundary paths, collection gaps and recovery assumptions. Then expand the scope systematically.
+The empty template names the collections. The fictional example demonstrates joins and different evidence levels; it is not an authoritative production schema or any organisation's estate. Local structural checks confirm IDs/references in the example; service owners must validate a populated model. Initial acceptance: one critical service with accountable ownership, explicit dependencies, boundary paths, collection gaps and recovery assumptions. Then expand the scope systematically.

@@ -61,5 +61,26 @@
     "changes_system": false,
     "requires_admin": false,
     "validation": "Native Windows/PowerShell validation pending"
+  },
+  {
+    "path": "cross-platform/security/evidence_manifest.py",
+    "purpose": "SHA-256 evidence snapshots and comparison",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
+  },
+  {
+    "path": "cross-platform/security/tls_expiry.py",
+    "purpose": "Verified TLS endpoint certificate expiry",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
+  },
+  {
+    "path": "cross-platform/security/compare_exports.py",
+    "purpose": "Offline listener drift and vulnerability-export reconciliation",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
   }
 ]

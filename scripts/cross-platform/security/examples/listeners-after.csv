@@ -1,0 +1,2 @@
+asset_id,protocol,address,port,process
+lab-web-01,tcp,0.0.0.0,8080,example-app

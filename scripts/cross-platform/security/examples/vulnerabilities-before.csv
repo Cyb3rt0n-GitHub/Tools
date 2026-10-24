@@ -1,0 +1,3 @@
+asset_id,finding_id,protocol,port,severity,status
+lab-web-01,scanner-a:check-100,tcp,443,high,open
+lab-web-01,scanner-a:check-200,host,-,medium,open

@@ -1,0 +1,65 @@
+[
+  {
+    "path": "linux/admin/system-summary.sh",
+    "purpose": "admin summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Linux local smoke check"
+  },
+  {
+    "path": "linux/network/network-summary.sh",
+    "purpose": "network summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Linux local smoke check"
+  },
+  {
+    "path": "linux/security/security-summary.sh",
+    "purpose": "security summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Linux local smoke check"
+  },
+  {
+    "path": "macos/admin/system-summary.sh",
+    "purpose": "admin summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Bash syntax checked; native macOS validation pending"
+  },
+  {
+    "path": "macos/network/network-summary.sh",
+    "purpose": "network summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Bash syntax checked; native macOS validation pending"
+  },
+  {
+    "path": "macos/security/security-summary.sh",
+    "purpose": "security summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Bash syntax checked; native macOS validation pending"
+  },
+  {
+    "path": "windows/admin/Get-SystemSummary.ps1",
+    "purpose": "admin summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Native Windows/PowerShell validation pending"
+  },
+  {
+    "path": "windows/network/Get-NetworkSummary.ps1",
+    "purpose": "network summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Native Windows/PowerShell validation pending"
+  },
+  {
+    "path": "windows/security/Get-SecuritySummary.ps1",
+    "purpose": "security summary",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Native Windows/PowerShell validation pending"
+  }
+]

@@ -1,193 +1,96 @@
+"""Collect DNS evidence without treating lookup errors as missing controls."""
+import argparse
+from pathlib import Path
+import re
+import dns.exception
 import dns.resolver
 
-def fetch_spf_record(domain):
-    spf_record = None
-    resolvers = [dns.resolver.Resolver(), dns.resolver.Resolver(configure=False)]
-    resolvers[0].nameservers = ["8.8.8.8"]  # First resolver uses Google Public DNS
-    resolvers[1].nameservers = ["8.8.4.4"]  # Second resolver uses another Google Public DNS server
+SELECTORS = ("selector1", "selector2", "default", "s1", "s2")
 
+
+def read_domains(path):
+    domains = []
+    for number, line in enumerate(Path(path).read_text(encoding="utf-8-sig").splitlines(), 1):
+        domain = line.split("#", 1)[0].strip().rstrip(".").lower()
+        if not domain:
+            continue
+        domain = domain.encode("idna").decode("ascii")
+        if len(domain) > 253 or not all(re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", label) for label in domain.split(".")):
+            raise ValueError(f"Invalid hostname on line {number}: {domain}")
+        if domain not in domains:
+            domains.append(domain)
+    if not domains:
+        raise ValueError("Input contains no domains")
+    return domains
+
+
+def lookup_txt(name, resolver=None):
+    resolver = resolver or dns.resolver.Resolver()
     try:
-        for resolver in resolvers:
-            try:
-                txt_records = resolver.resolve(domain, "TXT")
-                for record in txt_records:
-                    if "v=spf1" in str(record):
-                        spf_record = record
-                        break
-                if spf_record:
-                    break
-            except dns.resolver.NXDOMAIN:
-                continue
-            except dns.resolver.LifetimeTimeout:
-                continue
+        answer = resolver.resolve(name, "TXT", lifetime=5)
+        return [b"".join(record.strings).decode("utf-8", errors="replace") for record in answer], None
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+        return [], None
+    except dns.exception.DNSException as exc:
+        return [], f"Lookup failed ({type(exc).__name__}); presence unknown"
 
-    except dns.resolver.NoAnswer:
-        pass
 
-    return spf_record
+def collect_records(domain, selectors=SELECTORS, resolver=None):
+    records = {}
+    for label, name, prefix in (("DMARC", "_dmarc." + domain, "v=DMARC1"),
+                                ("SPF", domain, "v=spf1"),
+                                ("MTA-STS", "_mta-sts." + domain, "v=STSv1")):
+        values, error = lookup_txt(name, resolver)
+        records[label] = ([v for v in values if v.split(";", 1)[0].split(" ", 1)[0] == prefix], error)
+    for selector in selectors:
+        values, error = lookup_txt(f"{selector}._domainkey.{domain}", resolver)
+        records[f"DKIM ({selector})"] = ([v for v in values if any(part.strip().startswith("p=") for part in v.split(";"))], error)
+    return records
+
+
+def format_records(records):
+    return "".join(f"{label}: {error or (' | '.join(values) if values else 'No matching TXT record at queried name')}\n"
+                   for label, (values, error) in records.items())
+
+
+def fetch_spf_record(domain):
+    return next(iter(collect_records(domain, selectors=())["SPF"][0]), None)
+
 
 def fetch_dns_and_mta_sts_records(domain):
-    dns_records_info = ""
-    mta_sts_info = ""
+    records = collect_records(domain)
+    mta = {"MTA-STS": records.pop("MTA-STS")}
+    return format_records(records), format_records(mta)
 
-    resolvers = [dns.resolver.Resolver(), dns.resolver.Resolver(configure=False)]
-    resolvers[0].nameservers = ["8.8.8.8"]  # First resolver uses Google Public DNS
-    resolvers[1].nameservers = ["8.8.4.4"]  # Second resolver uses another Google Public DNS server
 
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("input", nargs="?", default="domains.txt")
+    parser.add_argument("--output", default="domain_results.txt")
+    parser.add_argument("--selector", action="append", help="DKIM selector; repeat to check multiple (overrides defaults)")
+    args = parser.parse_args(argv)
+    selectors = args.selector if args.selector is not None else SELECTORS
+    if any(not re.fullmatch(r"[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*", s) for s in selectors):
+        parser.error("Invalid DKIM selector")
     try:
-        # Query for DMARC record from multiple resolvers
-        dmarc_record = None
-        for resolver in resolvers:
-            try:
-                dmarc_record = resolver.resolve("_dmarc." + domain, "TXT")
-                break
-            except dns.resolver.NXDOMAIN:
-                continue
+        domains = read_domains(args.input)
+        if Path(args.input).resolve() == Path(args.output).resolve():
+            raise ValueError("Output must differ from input")
+    except (OSError, ValueError, UnicodeError) as exc:
+        parser.error(str(exc))
+    results = [(domain, collect_records(domain, selectors)) for domain in domains]
+    with open(args.output, "w", encoding="utf-8") as output:
+        for domain, records in results:
+            output.write(f"{domain}\n{format_records(records)}\n")
+        output.write("Summary: domains with matching TXT records (presence only, not validation)\n")
+        for label in ("DMARC", "SPF", "MTA-STS"):
+            present = [domain for domain, records in results if records[label][0]]
+            output.write(f"{label}: {len(present)}/{len(results)} — {', '.join(present)}\n")
+        output.write("DKIM: only the selected names were checked; absence does not establish that DKIM is disabled.\n")
+        output.write("MTA-STS: DNS advertisement only; HTTPS policy and enforcement were not checked.\n")
+    print(f"Processed {len(results)} domains. Results: {args.output}")
+    return 0
 
-        if dmarc_record:
-            dns_records_info += f"DMARC: {str(dmarc_record.response.answer[0][0])}\n"
-        else:
-            dns_records_info += "DMARC: None Found\n"
-
-        dkim_selectors = [
-            "selector1",    # Microsoft (Outlook/Exchange)
-            "selector2",    # Microsoft (Outlook/Exchange)
-            "default",      # Default DKIM selector (you can remove this if not needed)
-            "mxvault",      # Global Micro
-            "mandrill",     # Mandrill
-            "sendgrid",     # SendGrid
-            "s1",           # SendinBlue
-            "s2",           # SendinBlue
-            "k1",           # Custom Provider (Example)
-            "k2",           # Custom Provider (Example)
-            "k3",           # Custom Provider (Example)
-            "pp",           # Postmark
-            "dkim",         # Hetzner
-            "amazonses",    # Amazon SES
-            "yahoo",        # Yahoo
-            "sparkpost",    # SparkPost
-            "zoho",         # Zoho
-            "authsmtp",     # AuthSMTP
-            "dynect",       # DynECT Email Delivery
-            "socketlabs",   # SocketLabs
-            "turbosmtp",    # TurboSMTP
-            "vzrelay",      # Verizon
-            "emarsys",      # Emarsys
-            "yandex",       # Yandex.Mail
-            "postmark",     # Postmark
-        ]
-        dkim_found = False
-        for selector in dkim_selectors:
-            dkim_record = None
-            for resolver in resolvers:
-                try:
-                    dkim_record = resolver.resolve(f"{selector}._domainkey." + domain, "TXT")
-                    break
-                except dns.resolver.NXDOMAIN:
-                    continue
-                except dns.resolver.NoAnswer:
-                    continue
-                except dns.resolver.LifetimeTimeout:
-                    continue
-
-            if dkim_record and str(dkim_record.response.answer[0][0]) != "No DKIM record found":
-                dkim_found = True
-                dns_records_info += f"DKIM ({selector}): {str(dkim_record.response.answer[0][0])}\n"
-        
-        if not dkim_found:
-            dns_records_info += "DKIM: None Found\n"
-
-    except dns.resolver.NoNameservers:
-        pass  # Handle DNS resolution error here if needed
-
-    spf_record = fetch_spf_record(domain)
-    if spf_record:
-        dns_records_info += f"SPF: {str(spf_record)}\n"
-    else:
-        dns_records_info += "SPF: None Found\n"
-
-    try:
-        mta_sts_response = dns.resolver.resolve("_mta-sts." + domain, "TXT")
-        mta_sts_records = [rdata.to_text().strip('\"') for rdata in mta_sts_response]
-        if mta_sts_records:
-            mta_sts_info = "\n".join(f"MTA-STS: {record}" for record in mta_sts_records)
-        else:
-            mta_sts_info = "MTA-STS: None Found\n"
-    except dns.resolver.NXDOMAIN:
-        mta_sts_info = "MTA-STS: None Found\n"
-    except dns.resolver.NoNameservers:
-        mta_sts_info = "MTA-STS: DNS resolution failed. None Found\n"
-    except dns.resolver.Timeout:
-        mta_sts_info = "MTA-STS: DNS resolution for MTA-STS timed out\n"
-    except dns.resolver.NoAnswer:
-        mta_sts_info = "MTA-STS: None Found\n"
-
-    return dns_records_info, mta_sts_info
-
-def main():
-    input_file_path = "domains.txt" # Make this as a list of domains to check
-    output_file_path = "domain_results.txt" 
-
-    domains_with_dmarc = []
-    domains_with_spf = []
-    domains_with_dkim = []
-    domains_with_mta_sts = []
-
-    with open(input_file_path, "r") as input_file:
-        total_domains = sum(1 for _ in input_file)  # Count the total number of domains
-        input_file.seek(0)  # Reset the file pointer for reading
-
-        print("Fetching DNS and MTA-STS records...")
-        for index, line in enumerate(input_file, start=1):
-            domain = line.strip()
-            dns_info, mta_sts_info = fetch_dns_and_mta_sts_records(domain)
-
-            if "DMARC: None Found" not in dns_info:
-                domains_with_dmarc.append(domain)
-            if "SPF: None Found" not in dns_info:
-                domains_with_spf.append(domain)
-            if "DKIM: None Found" not in dns_info:
-                domains_with_dkim.append(domain)
-            if "MTA-STS: None Found" not in mta_sts_info:
-                domains_with_mta_sts.append(domain)
-
-            # Display progress update
-            print(f"Processed domain {index}/{total_domains}: {domain}")
-
-    with open(output_file_path, "w") as output_file:
-        print("Writing results to the output file...")
-        for domain in domains_with_dmarc:
-            dns_info, mta_sts_info = fetch_dns_and_mta_sts_records(domain)
-            
-            output_file.write(f"{domain}\n")
-            output_file.write(f"{dns_info}")
-            output_file.write(f"{mta_sts_info}\n\n")
-
-        output_file.write("\nDomains with DMARC records:\n")
-        output_file.write(f"Total: {len(domains_with_dmarc)}\n")
-        for domain in domains_with_dmarc:
-            output_file.write(f"{domain}\n")
-        output_file.write("\n")
-
-        output_file.write("Domains with SPF records:\n")
-        output_file.write(f"Total: {len(domains_with_spf)}\n")
-        for domain in domains_with_spf:
-            output_file.write(f"{domain}\n")
-        output_file.write("\n")
-
-        output_file.write("Domains with DKIM records:\n")
-        output_file.write(f"Total: {len(domains_with_dkim)}\n")
-        for domain in domains_with_dkim:
-            output_file.write(f"{domain}\n")
-        output_file.write("\n")
-
-        output_file.write("Domains with MTA-STS records:\n")
-        output_file.write(f"Total: {len(domains_with_mta_sts)}\n")
-        for domain in domains_with_mta_sts:
-            output_file.write(f"{domain}\n")
-        output_file.write("\n")
-
-    print("Tool has completed. Results saved to the output file.")
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

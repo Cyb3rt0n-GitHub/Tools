@@ -1,4 +1,15 @@
 $ErrorActionPreference = 'Stop'
+# Parse cookbook PowerShell examples without executing them or contacting targets.
+$cookbook = Join-Path $PSScriptRoot '../docs/cookbook'
+foreach ($page in Get-ChildItem -LiteralPath $cookbook -Filter '*.md') {
+    $text = Get-Content -LiteralPath $page.FullName -Raw
+    foreach ($block in [regex]::Matches($text, '(?s)```powershell\r?\n(.*?)```')) {
+        $tokens = $null
+        $syntaxErrors = $null
+        [System.Management.Automation.Language.Parser]::ParseInput($block.Groups[1].Value, [ref]$tokens, [ref]$syntaxErrors) | Out-Null
+        if ($syntaxErrors.Count -gt 0) { throw ("Cookbook syntax error in " + $page.Name + ': ' + ($syntaxErrors | Out-String)) }
+    }
+}
 $collector = Join-Path $PSScriptRoot '../scripts/windows/security/Get-FileSignatureInventory.ps1'
 $tempFile = Join-Path $env:TEMP ([guid]::NewGuid().ToString() + '.ps1')
 try {

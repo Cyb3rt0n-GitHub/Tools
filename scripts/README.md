@@ -1,6 +1,6 @@
 # Personal admin, network and security scripts
 
-A starter collection for Cyb3rt0n-GitHub's personal/public account. Standalone scripts are grouped by platform and purpose. Somerset/SC and the current SecureScanBot project are excluded.
+A starter collection for Cyb3rt0n-GitHub's personal/public account. Standalone scripts are grouped by platform and purpose. Workplace and enterprise projects are excluded.
 
 | Platform | Admin | Network | Security |
 |---|---|---|---|

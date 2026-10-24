@@ -1,5 +1,7 @@
 # Personal security tools
 
+Start with the [tool selection guide](TOOL-GUIDE.md): why each tool exists, when to use it and what its output helps you decide.
+
 Small public utilities by Cyb3rt0n. These collect evidence; they do not certify a domain as secure. Use TLS scans only within your authorised scope.
 
 ## Email DNS evidence — `py3dns.py`

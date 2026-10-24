@@ -67,3 +67,5 @@ Topology-dependent or state-changing material belongs under `lab/`, with separat
 See [evidence manifests and TLS expiry](cross-platform/security/README.md) for SHA-256 collection/change comparison and verified certificate checks. Python 3.10+, no extra packages.
 
 Compare saved [listener and vulnerability exports](cross-platform/security/README.md#listener-drift-and-vulnerability-export-reconciliation) to identify observation changes without automatically declaring remediation.
+
+See the [tool selection guide](../TOOL-GUIDE.md) for the reason to use each tool, the decision it supports and its limits.

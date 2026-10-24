@@ -4,83 +4,151 @@
     "purpose": "admin summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Linux local smoke check"
+    "validation": "Linux local smoke check",
+    "why": "Establish OS, uptime, disk and memory context before diagnosing a host.",
+    "when_to_use": "At incident triage, support handover or before maintenance.",
+    "decision_supported": "Decide whether resource constraints or platform differences explain the symptom.",
+    "interpretation_limit": "A snapshot is not a performance trend or full patch/compliance inventory."
   },
   {
     "path": "linux/network/network-summary.sh",
     "purpose": "network summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Linux local smoke check"
+    "validation": "Linux local smoke check",
+    "why": "Explain how the host is connected and where traffic is expected to go.",
+    "when_to_use": "When investigating DNS, connectivity, routing or unexpected local services.",
+    "decision_supported": "Choose the next interface, route, resolver or listener to investigate.",
+    "interpretation_limit": "Local configuration does not prove end-to-end reachability or external exposure; platform outputs differ."
   },
   {
     "path": "linux/security/security-summary.sh",
     "purpose": "security summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Linux local smoke check"
+    "validation": "Linux local smoke check",
+    "why": "Collect a quick view of locally available security-control status.",
+    "when_to_use": "During initial host review or after approved security configuration work.",
+    "decision_supported": "Identify unavailable or unexpected controls that need a targeted check.",
+    "interpretation_limit": "Missing privileges/tools make results incomplete; this is not a hardening score or compliance verdict."
   },
   {
     "path": "macos/admin/system-summary.sh",
     "purpose": "admin summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Bash syntax checked; native macOS validation pending"
+    "validation": "Bash syntax checked; native macOS validation pending",
+    "why": "Establish OS, uptime, disk and memory context before diagnosing a host.",
+    "when_to_use": "At incident triage, support handover or before maintenance.",
+    "decision_supported": "Decide whether resource constraints or platform differences explain the symptom.",
+    "interpretation_limit": "A snapshot is not a performance trend or full patch/compliance inventory."
   },
   {
     "path": "macos/network/network-summary.sh",
     "purpose": "network summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Bash syntax checked; native macOS validation pending"
+    "validation": "Bash syntax checked; native macOS validation pending",
+    "why": "Explain how the host is connected and where traffic is expected to go.",
+    "when_to_use": "When investigating DNS, connectivity, routing or unexpected local services.",
+    "decision_supported": "Choose the next interface, route, resolver or listener to investigate.",
+    "interpretation_limit": "Local configuration does not prove end-to-end reachability or external exposure; platform outputs differ."
   },
   {
     "path": "macos/security/security-summary.sh",
     "purpose": "security summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Bash syntax checked; native macOS validation pending"
+    "validation": "Bash syntax checked; native macOS validation pending",
+    "why": "Collect a quick view of locally available security-control status.",
+    "when_to_use": "During initial host review or after approved security configuration work.",
+    "decision_supported": "Identify unavailable or unexpected controls that need a targeted check.",
+    "interpretation_limit": "Missing privileges/tools make results incomplete; this is not a hardening score or compliance verdict."
   },
   {
     "path": "windows/admin/Get-SystemSummary.ps1",
     "purpose": "admin summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Native Windows/PowerShell validation pending"
+    "validation": "Native Windows/PowerShell validation pending",
+    "why": "Establish OS, uptime, disk and memory context before diagnosing a host.",
+    "when_to_use": "At incident triage, support handover or before maintenance.",
+    "decision_supported": "Decide whether resource constraints or platform differences explain the symptom.",
+    "interpretation_limit": "A snapshot is not a performance trend or full patch/compliance inventory."
   },
   {
     "path": "windows/network/Get-NetworkSummary.ps1",
     "purpose": "network summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Native Windows/PowerShell validation pending"
+    "validation": "Native Windows/PowerShell validation pending",
+    "why": "Explain how the host is connected and where traffic is expected to go.",
+    "when_to_use": "When investigating DNS, connectivity, routing or unexpected local services.",
+    "decision_supported": "Choose the next interface, route, resolver or listener to investigate.",
+    "interpretation_limit": "Local configuration does not prove end-to-end reachability or external exposure; platform outputs differ."
   },
   {
     "path": "windows/security/Get-SecuritySummary.ps1",
     "purpose": "security summary",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Native Windows/PowerShell validation pending"
+    "validation": "Native Windows/PowerShell validation pending",
+    "why": "Collect a quick view of locally available security-control status.",
+    "when_to_use": "During initial host review or after approved security configuration work.",
+    "decision_supported": "Identify unavailable or unexpected controls that need a targeted check.",
+    "interpretation_limit": "Missing privileges/tools make results incomplete; this is not a hardening score or compliance verdict."
   },
   {
     "path": "cross-platform/security/evidence_manifest.py",
     "purpose": "SHA-256 evidence snapshots and comparison",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending",
+    "why": "Detect file-content changes and identify the exact evidence bytes preserved.",
+    "when_to_use": "Before and after evidence transfer, analysis or controlled maintenance.",
+    "decision_supported": "Decide which files need investigation or recollection.",
+    "interpretation_limit": "Hashes do not prove provenance; collection is not atomic and skipped/error paths remain unassessed."
   },
   {
     "path": "cross-platform/security/tls_expiry.py",
     "purpose": "Verified TLS endpoint certificate expiry",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending",
+    "why": "Spot impending certificate expiry or certificate/identity validation failures.",
+    "when_to_use": "Before renewals, during service onboarding or after certificate deployment.",
+    "decision_supported": "Prioritise renewal or investigate trust, hostname and connectivity errors.",
+    "interpretation_limit": "One verified endpoint is not complete TLS coverage; trust depends on local clock/store and revocation is not established."
   },
   {
     "path": "cross-platform/security/compare_exports.py",
     "purpose": "Offline listener drift and vulnerability-export reconciliation",
     "changes_system": false,
     "requires_admin": false,
-    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending"
+    "validation": "Synthetic regression tests; Linux tested; native Windows/macOS validation pending",
+    "why": "Expose listener-binding drift and changes between vulnerability exports without silently declaring closure.",
+    "when_to_use": "After changes or between equivalent scheduled collections.",
+    "decision_supported": "Investigate new observations, metadata changes and items no longer observed.",
+    "interpretation_limit": "Normalised CSV required; absent findings are not confirmed fixed and scope/collector success need independent verification."
+  },
+  {
+    "path": "cross-platform/security/review_sshd.py",
+    "why": "Turn effective SSH settings into review prompts while retaining authentication and access context.",
+    "when_to_use": "When reviewing saved sshd -T output for a specific default or simulated connection context.",
+    "decision_supported": "Select settings needing design/owner review before proposing changes.",
+    "interpretation_limit": "Not a compliance baseline; does not prove the running daemon uses these settings or that MFA/reachability works.",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Synthetic parser regression tests; native Linux/macOS sshd collection validation pending"
+  },
+  {
+    "path": "windows/security/Get-FileSignatureInventory.ps1",
+    "why": "Record file identity and publisher-signature observations without running the files.",
+    "when_to_use": "When checking software deliveries, suspected tampering or post-change binaries.",
+    "decision_supported": "Select files needing provenance checks, sandbox analysis or vendor confirmation.",
+    "interpretation_limit": "Valid is not safe; unsigned is not malicious; host trust and network/cache behaviour affect validation.",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Windows synthetic-file CI added; broader operational validation pending"
   }
 ]

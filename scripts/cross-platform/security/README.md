@@ -73,3 +73,21 @@ A loopback-to-wildcard binding appears as an old observation disappearing and a 
 The tool deliberately avoids a synthetic risk score. Threat signals need local context: FIRST explains that EPSS predicts exploitation activity and is not a complete risk score. See [FIRST EPSS FAQ](https://www.first.org/epss/faq) before adding prioritisation fields.
 
 Tests cover binding changes, finding severity changes, IPv6/port normalisation, duplicate conflicts, invalid rows, header-only exports and timezone validation. All comparisons run offline with synthetic data.
+
+See the [tool selection guide](../../../TOOL-GUIDE.md) for the reason to use each tool, the decision it supports and its limits.
+
+## Effective SSH configuration review
+
+Why: SSH Include/Match behaviour can make source-file inspection misleading. Review saved effective settings for the exact connection context before proposing an authentication or forwarding change. This tool reads a text file only; it never runs sshd or changes services.
+
+On the authorised Linux/macOS host, an administrator can collect the default context with `/usr/sbin/sshd -T`. Where permissions/key access require elevation, use the organisation's approved process; no automatic sudo or key generation is supplied. To simulate Match rules, use the local version's `-C user=NAME,addr=SOURCE_IP,host=SOURCE_HOST,laddr=LOCAL_IP,lport=22`. Capture stdout to a new private file and check the command exit code/stderr before using it. Exact supported context fields vary by OpenSSH version. No login attempt is performed. Collection may read host keys/config and fail if privileges/prerequisites are missing. Only analyse trusted output; do not execute unknown configurations.
+
+```bash
+python review_sshd.py saved-sshd-effective.txt --context-label 'default, no -C context'
+```
+
+The JSON retains input SHA-256, all effective values, authentication/access context and review prompts. Supply a label recording the exact context when -C was used. Exit 0: parsed; 2: read/format failure. A parsed report may still contain review/unknown states. Reference values are conservative prompts, not a compliance baseline: interactive authentication may be required for MFA and forwarding may support approved work. Never disable authentication methods before confirming a tested access/recovery design.
+
+Raw sshd_config, empty input and obviously incomplete output are rejected, but format checks cannot prove completeness or provenance. Missing settings are unknown. Saved output does not prove the running daemon has loaded it, every Match context is covered, MFA works or the service is reachable. Review each intended context separately. Linux/macOS native collection has not been exercised here; parser tests use synthetic output.
+
+[OpenSSH sshd manual: -T and -C](https://man.openbsd.org/sshd)

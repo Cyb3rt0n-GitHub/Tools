@@ -53,3 +53,5 @@ go test ./...
 ```
 
 Tests use synthetic data and mocked external services. No real target scans are required.
+
+See the [tool selection guide](../../TOOL-GUIDE.md) for the reason to use each tool, the decision it supports and its limits.

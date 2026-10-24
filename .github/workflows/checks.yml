@@ -28,3 +28,10 @@ jobs:
           cache: false
       - run: go test ./...
       - run: go vet ./...
+  windows-signatures:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test synthetic file signature collection
+        shell: powershell
+        run: ./tests/Test-FileSignatureInventory.ps1

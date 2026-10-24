@@ -52,3 +52,7 @@ The original also contains crawling/screenshots, ProjectDiscovery fingerprinting
 ## Read the result, not a green exit alone
 
 HTTP success is not application assurance; collection is not ownership; a banner is not patch proof; absence is not remediation. Retain timestamp, source vantage, tools, explicit scope, hostname/SNI, selected address/port, errors and incomplete coverage. Keep originals separate from summaries. The public [tool guide](../../TOOL-GUIDE.md) links complementary scripts.
+
+## Map an organisation
+
+See [enterprise discovery and mapping](../enterprise-mapping/README.md) for documented methods across services, security zones, firewalls/proxies, AD, on-premises, hybrid, cloud and suppliers, with a local-authority scenario and linked-record templates.

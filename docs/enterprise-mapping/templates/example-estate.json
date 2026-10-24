@@ -1,0 +1,192 @@
+{
+  "format_version": 1,
+  "example_only": true,
+  "scope_status": "fictional_example",
+  "note": "All names, relationships and statuses are fictional teaching data. No real organisation is represented.",
+  "scopes": [
+    {
+      "scope_id": "SCOPE1",
+      "name": "Fictional service-mapping pilot",
+      "collection_authorised": false,
+      "active_tests_authorised": false
+    }
+  ],
+  "owners": [
+    {
+      "owner_id": "OWNER1",
+      "role": "Example service team"
+    }
+  ],
+  "services": [
+    {
+      "service_id": "SERVICE1",
+      "name": "Example resident request service",
+      "owner_id": "OWNER1",
+      "criticality": "requires_owner_assessment"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "ASSET1",
+      "name": "example-app",
+      "type": "application",
+      "hosting": "hybrid",
+      "owner_id": "OWNER1"
+    },
+    {
+      "asset_id": "ASSET2",
+      "name": "example-edge",
+      "type": "reverse_proxy",
+      "hosting": "on_premises",
+      "owner_id": "OWNER1"
+    },
+    {
+      "asset_id": "ASSET3",
+      "name": "example-idp",
+      "type": "identity_provider",
+      "hosting": "saas",
+      "owner_id": "OWNER1"
+    }
+  ],
+  "interfaces": [
+    {
+      "interface_id": "INTERFACE1",
+      "asset_id": "ASSET1",
+      "network_id": "NETWORK1",
+      "zone_id": "ZONE2",
+      "assignments": [
+        {
+          "address": "192.0.2.10",
+          "valid_from": null,
+          "valid_to": null,
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "networks": [
+    {
+      "network_id": "NETWORK1",
+      "prefix": "192.0.2.0/24",
+      "address_family": 4,
+      "network_context_id": "fictional-vrf-1",
+      "zone_id": "ZONE2"
+    }
+  ],
+  "zones": [
+    {
+      "zone_id": "ZONE1",
+      "zone_role": "public_edge",
+      "local_colour": "amber",
+      "legend": "Illustrative local legend; not assessment status"
+    },
+    {
+      "zone_id": "ZONE2",
+      "zone_role": "restricted_workload",
+      "local_colour": "green",
+      "legend": "No implicit trust"
+    },
+    {
+      "zone_id": "ZONE3",
+      "zone_role": "identity_control",
+      "local_colour": null,
+      "legend": "Separate control-plane view"
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_id": "BOUNDARY1",
+      "asset_id": "ASSET2",
+      "source_zone_id": "ZONE1",
+      "destination_zone_id": "ZONE2",
+      "type": "reverse_proxy_path",
+      "policy_version": null
+    }
+  ],
+  "identities": [
+    {
+      "identity_id": "IDENTITY1",
+      "provider_asset_id": "ASSET3",
+      "type": "workload",
+      "owner_id": "OWNER1",
+      "native_id": null
+    }
+  ],
+  "flows": [
+    {
+      "flow_id": "FLOW1",
+      "service_id": "SERVICE1",
+      "source_asset_id": "ASSET2",
+      "destination_asset_id": "ASSET1",
+      "protocol": "tcp",
+      "destination_port": 443,
+      "boundary_ids": [
+        "BOUNDARY1"
+      ],
+      "identity_id": null,
+      "intended_decision": "reported_allow",
+      "configured_decision": "unknown",
+      "observed_decision": "unknown",
+      "validation_status": "not_tested",
+      "evidence_ids": [
+        "EVIDENCE1"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relation_id": "REL1",
+      "from_id": "SERVICE1",
+      "to_id": "ASSET1",
+      "relation_type": "depends_on",
+      "knowledge_state": "reported",
+      "evidence_ids": [
+        "EVIDENCE1"
+      ]
+    },
+    {
+      "relation_id": "REL2",
+      "from_id": "ASSET1",
+      "to_id": "ASSET3",
+      "relation_type": "authenticates_via",
+      "knowledge_state": "reported",
+      "evidence_ids": [
+        "EVIDENCE1"
+      ]
+    }
+  ],
+  "suppliers": [],
+  "collections": [],
+  "evidence": [
+    {
+      "evidence_id": "EVIDENCE1",
+      "source": "fictional workshop assertion",
+      "private_location": null,
+      "sha256": null,
+      "observed_at": null,
+      "knowledge_state": "reported",
+      "note": "Not an observed or validated connection"
+    }
+  ],
+  "assessments": [
+    {
+      "assessment_id": "ASSESSMENT1",
+      "subject_id": "BOUNDARY1",
+      "criterion": "Effective boundary policy confirmed",
+      "assessment_status": "unknown",
+      "reason": "No running policy, logs or scoped test evidence",
+      "owner_id": "OWNER1",
+      "evidence_ids": []
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "ISSUE1",
+      "subject_id": "BOUNDARY1",
+      "type": "evidence_gap",
+      "owner_id": "OWNER1",
+      "next_action": "Obtain approved effective policy and collection scope from the boundary owner",
+      "status": "open"
+    }
+  ]
+}

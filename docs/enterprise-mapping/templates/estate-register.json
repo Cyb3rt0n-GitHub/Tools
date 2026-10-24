@@ -1,0 +1,22 @@
+{
+  "format_version": 1,
+  "example_only": false,
+  "scope_status": "not_started",
+  "note": "Populate only in an approved private environment; this is a proposed model, not a validated production schema.",
+  "scopes": [],
+  "owners": [],
+  "services": [],
+  "assets": [],
+  "interfaces": [],
+  "networks": [],
+  "zones": [],
+  "boundaries": [],
+  "identities": [],
+  "flows": [],
+  "relationships": [],
+  "suppliers": [],
+  "collections": [],
+  "evidence": [],
+  "assessments": [],
+  "issues": []
+}

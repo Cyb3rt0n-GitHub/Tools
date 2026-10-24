@@ -62,3 +62,7 @@ Use the [Who, What, Where, When, How and Why guides](docs/tools/README.md) for s
 ## Cyber Security Cookbook
 
 The [21 validation recipes](docs/cookbook/README.md) cover practical DNS, mail, HTTP/TLS, IPv6, SSH, scoped discovery and evidence workflows. Every recipe explains who, what, where, when, how and why. All use generic inputs; advanced methods have a separate review guide.
+
+## Enterprise mapping research
+
+The [enterprise discovery and mapping pack](docs/enterprise-mapping/README.md) connects services, assets, identity, zones, boundaries and flows. It includes primary research, a generic local-authority scenario, documented AD examples and fictional register templates. No corporate collection was performed.

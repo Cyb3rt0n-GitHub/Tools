@@ -150,5 +150,16 @@
     "changes_system": false,
     "requires_admin": false,
     "validation": "Windows synthetic-file CI added; broader operational validation pending"
+  },
+  {
+    "path": "cross-platform/security/check_nmap_coverage.py",
+    "purpose": "Offline Nmap TCP coverage accounting",
+    "why": "Detect unaccounted-for targets/ports and incomplete batches before reporting scope coverage.",
+    "when_to_use": "After an authorised scan, before reporting or after timeouts.",
+    "decision_supported": "Investigate collection gaps or proceed to interpreting supported evidence.",
+    "interpretation_limit": "XML accounting consistency is not packet-level completeness or a security verdict.",
+    "changes_system": false,
+    "requires_admin": false,
+    "validation": "Synthetic regression tests; no live scans; native Windows/macOS pending"
   }
 ]

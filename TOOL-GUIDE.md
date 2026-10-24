@@ -23,6 +23,10 @@ Start with the question you need to answer. These are evidence and review aids. 
 | [legacy/domain-scanner/legacy_domain_scanner.py](legacy/domain-scanner/legacy_domain_scanner.py) | Preserve the earlier combined DNS/TLS evidence workflow for users who need its report format. | Only when that legacy report format is specifically required. | Review per-domain DNS/TLS evidence and collection errors. | Overlaps newer tools; no AI; limited DKIM/MTA-STS coverage; no assurance verdict. |
 | [legacy/domain-scanner/legacy_domain_scanner.go](legacy/domain-scanner/legacy_domain_scanner.go) | Preserve the earlier combined DNS/TLS evidence workflow for users who need its report format. | Only when that legacy report format is specifically required. | Review per-domain DNS/TLS evidence and collection errors. | Overlaps newer tools; no AI; limited DKIM/MTA-STS coverage; no assurance verdict. |
 
+## Offline Nmap coverage checker
+
+See [the full six-question recipe](docs/cookbook/21-nmap-coverage.md). Use it after authorised discovery to identify missing targets, port-count mismatches, duplicate batches and unsuccessful/timeout evidence. Its decision is whether to investigate collection coverage before interpreting results; it does not certify wire-level completeness or security.
+
 ## Standard for every addition
 
 Document the problem, why the tool is useful, when to run it, prerequisites/privileges, exact commands, outputs, interpretation, next action, limits, validation and any changes/recovery. A tool needs a clear engineering decision it supports. Prefer existing tools when another script would only duplicate them.

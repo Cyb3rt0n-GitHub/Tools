@@ -61,4 +61,4 @@ Use the [Who, What, Where, When, How and Why guides](docs/tools/README.md) for s
 
 ## Cyber Security Cookbook
 
-The [20 validation recipes](docs/cookbook/README.md) cover practical DNS, mail, HTTP/TLS, IPv6, SSH, scoped discovery and evidence workflows. Every recipe explains who, what, where, when, how and why. All use generic inputs; advanced methods have a separate review guide.
+The [21 validation recipes](docs/cookbook/README.md) cover practical DNS, mail, HTTP/TLS, IPv6, SSH, scoped discovery and evidence workflows. Every recipe explains who, what, where, when, how and why. All use generic inputs; advanced methods have a separate review guide.

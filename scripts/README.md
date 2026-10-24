@@ -69,3 +69,5 @@ See [evidence manifests and TLS expiry](cross-platform/security/README.md) for S
 Compare saved [listener and vulnerability exports](cross-platform/security/README.md#listener-drift-and-vulnerability-export-reconciliation) to identify observation changes without automatically declaring remediation.
 
 See the [tool selection guide](../TOOL-GUIDE.md) for the reason to use each tool, the decision it supports and its limits.
+
+Review [saved Nmap TCP coverage](../docs/cookbook/21-nmap-coverage.md) before reporting intended scan scope as covered. This checker is offline.

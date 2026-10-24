@@ -20,3 +20,5 @@ Each guide explains Who, What, Where, When, How and Why, followed by output inte
 - [scripts/windows/security/Get-FileSignatureInventory.ps1](scripts-windows-security-Get-FileSignatureInventory-ps1.md)
 - [legacy/domain-scanner/legacy_domain_scanner.py](legacy-domain-scanner-legacy_domain_scanner-py.md)
 - [legacy/domain-scanner/legacy_domain_scanner.go](legacy-domain-scanner-legacy_domain_scanner-go.md)
+
+- [Offline Nmap TCP coverage checker](../cookbook/21-nmap-coverage.md)

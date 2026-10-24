@@ -36,6 +36,8 @@ Reusable methods adapted from a private validation toolbox. Organisation-specifi
 
 - [Native Windows verified HTTPS evidence](20-windows-verified-https.md)
 
+- [Check saved Nmap TCP coverage](21-nmap-coverage.md)
+
 ## Further methods: explicit review required
 
 The original also contains crawling/screenshots, ProjectDiscovery fingerprinting, FTP/FTPS/POP3/IMAP variants, RPC/SNMP, broad/batched discovery, template scanning, package repair and native Windows evidence collection. Their useful concepts are retained in [advanced-methods.md](advanced-methods.md), with scope and validation requirements. Historical shell history, temporary workarounds, incomplete runs and case-specific results are not public recipes.

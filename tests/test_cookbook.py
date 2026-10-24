@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class CookbookChecks(unittest.TestCase):
     def test_recipes_have_sections_and_valid_shell_syntax(self):
         pages=list((ROOT/'docs/cookbook').glob('[0-9]*.md'))
-        self.assertEqual(len(pages),20)
+        self.assertEqual(len(pages),21)
         for page in pages:
             text=page.read_text(encoding='utf-8')
             for heading in ['Who','What','Where','When','How','Why','Output and interpretation','Next decision','Limits and recovery','Validation']:

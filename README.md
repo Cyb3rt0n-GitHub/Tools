@@ -48,3 +48,7 @@ bash -n ssl_scan_domains.sh
 ## Platform script collection
 
 See [scripts/README.md](scripts/README.md) for nine read-only Windows, macOS and Linux admin, network and security collectors, their requirements and validation status. Lab tools have a separate review section. The MIT licence in scripts/LICENSE applies only to that newly authored collection.
+
+## Legacy scanner
+
+The standalone [domain scanner](legacy/domain-scanner/README.md) has moved here from the retired GPT-Tools repository. It collects DNS and TLS evidence without AI integration.

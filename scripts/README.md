@@ -61,3 +61,7 @@ The newly authored starter scripts are supplied under the MIT licence in LICENSE
 ## Lab environments
 
 Topology-dependent or state-changing material belongs under `lab/`, with separate setup, preview, recovery and validation instructions. See [lab/README.md](lab/README.md).
+
+## Cross-platform engineering tools
+
+See [evidence manifests and TLS expiry](cross-platform/security/README.md) for SHA-256 collection/change comparison and verified certificate checks. Python 3.10+, no extra packages.
